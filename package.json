@@ -1,0 +1,12 @@
+{
+  "name": "picojs-node",
+  "version": "0.0.1",
+  "author": "yrq110 <yrq1025@gmail.com>",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "canvas": "^2.6.0",
+    "node-fetch": "^2.6.0",
+    "picojs": "^1.0.0"
+  }
+}
