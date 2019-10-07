@@ -1,6 +1,6 @@
 # node-picojs
 
-Making [picojs](https://github.com/tehnokv/picojs) be cool with Node env.
+Make using [picojs](https://github.com/tehnokv/picojs) feel cool in Node env.
 
 ## Usage
 
@@ -15,6 +15,5 @@ pico.face_detection('image_file.jpg', qThreshold, IoU),then(res => {
 
 ## Feature
 
-* Easy to use
 * Automatically calculate object sizes based on input image.
 * Custom qThreshold and [IoU](https://en.wikipedia.org/wiki/Jaccard_index) parameters

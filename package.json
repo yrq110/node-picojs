@@ -2,8 +2,10 @@
   "name": "node-picojs",
   "version": "0.0.1",
   "author": "yrq110 <yrq1025@gmail.com>",
+  "description": "using picojs easily in node",
   "main": "index.js",
   "license": "MIT",
+  "homepage": "https://github.com/yrq110/node-picojs",
   "dependencies": {
     "canvas": "^2.6.0",
     "picojs": "^1.0.0"
