@@ -17,14 +17,13 @@ const getFaceClassifier = async () => {
 const getImage = async (source) => {
   const image = await loadImage(source)
   const { width, height } = image
-  console.log(`width: ${width}, height: ${height}`);
   const canvas = createCanvas(width, height)
   const ctx = canvas.getContext('2d')
   ctx.drawImage(image, 0, 0)
   return { image, ctx };
 }
 /*
-  3. a function to transform an RGBA image to grayscale
+  3. transform an RGBA image to grayscale
 */
 const rgba_to_grayscale = (rgba, nrows, ncols) => {
   var gray = new Uint8Array(nrows*ncols);
@@ -49,7 +48,7 @@ const getDefaultParams = (width, height) => {
   return Object.assign(factor, size);
 }
 
-const face_detection = async (img, option, threshold = 5.0) => {
+const face_detection = async (img, option, qThreshold = 5.0, IoU = 0.2) => {
   const facefinder_classify_region = await getFaceClassifier();
   let { image, ctx} = await getImage(img);
   let { width, height } = image
@@ -68,9 +67,9 @@ const face_detection = async (img, option, threshold = 5.0) => {
   // (representing row, column, scale and detection score)
   dets = pico.run_cascade(imageParams, facefinder_classify_region, params);
   // cluster the obtained detections
-  dets = pico.cluster_detections(dets, 0.2); // set IoU threshold to 0.2
+  dets = pico.cluster_detections(dets, IoU); // set IoU threshold to 0.2
   // return results
-  return dets.filter(e => e[3] > threshold);
+  return dets.filter(e => e[3] > qThreshold);
 }
 
 const pico_node = {};
