@@ -1,6 +1,14 @@
 # node-picojs
 
-Make using [picojs](https://github.com/tehnokv/picojs) feel cool in Node env.
+Make using [picojs](https://github.com/tehnokv/picojs) feel cool in **Node** env.
+
+## Install
+
+```bash
+npm install --save node-picojs
+# or
+yarn add node-picojs
+```
 
 ## Usage
 
