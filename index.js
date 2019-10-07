@@ -6,7 +6,7 @@ const { createCanvas, loadImage } = require('canvas');
   1. load the face-detection cascade
 */
 const getFaceClassifier = async () => {
-  let buffer = fs.readFileSync('bin/facefinder');
+  let buffer = fs.readFileSync('./bin/facefinder');
   var bytes = new Int8Array(buffer);
   console.log('cascade loaded');
   return pico.unpack_cascade(bytes);
