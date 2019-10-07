@@ -1,12 +1,14 @@
 // import pico from 'picojs'
 const pico = require('picojs');
 const fs = require('fs');
+const path = require('path');
 const { createCanvas, loadImage } = require('canvas');
 /*
   1. load the face-detection cascade
 */
 const getFaceClassifier = async () => {
-  let buffer = fs.readFileSync('./bin/facefinder');
+  const filePath = path.join(__dirname, './bin/facefinder')
+  let buffer = fs.readFileSync(filePath);
   var bytes = new Int8Array(buffer);
   console.log('cascade loaded');
   return pico.unpack_cascade(bytes);
@@ -15,11 +17,11 @@ const getFaceClassifier = async () => {
   2. prepare the image and canvas context
 */
 const getImage = async (source) => {
-  const image = await loadImage(source)
-  const { width, height } = image
-  const canvas = createCanvas(width, height)
-  const ctx = canvas.getContext('2d')
-  ctx.drawImage(image, 0, 0)
+  const image = await loadImage(source);
+  const { width, height } = image;
+  const canvas = createCanvas(width, height);
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(image, 0, 0);
   return { image, ctx };
 }
 /*
@@ -40,18 +42,18 @@ const getDefaultParams = (width, height) => {
   const factor = {
     shiftfactor: 0.1,
     scalefactor: 1.1
-  }
+  };
   const size = {
     minsize: Math.min(width, height) * 0.07 >> 0, // minimum size of a face
     maxsize: Math.max(width, height) * 3 >> 0 // maximum size of a face
-  }
+  };
   return Object.assign(factor, size);
 }
 
 const face_detection = async (img, option, qThreshold = 5.0, IoU = 0.2) => {
   const facefinder_classify_region = await getFaceClassifier();
   let { image, ctx} = await getImage(img);
-  let { width, height } = image
+  let { width, height } = image;
   // re-draw the image to clear previous results and get its RGBA pixel data
   var rgba = ctx.getImageData(0, 0, width, height).data;
   // prepare input to `run_cascade`
@@ -60,7 +62,7 @@ const face_detection = async (img, option, qThreshold = 5.0, IoU = 0.2) => {
     "nrows": height,
     "ncols": width,
     "ldim": width
-  }
+  };
   const params = Object.assign(getDefaultParams(width, height), option);
   // run the cascade over the image
   // dets is an array that contains (r, c, s, q) quadruplets

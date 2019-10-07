@@ -1,6 +1,6 @@
 {
   "name": "node-picojs",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "author": "yrq110 <yrq1025@gmail.com>",
   "description": "using picojs easily in node",
   "main": "index.js",
