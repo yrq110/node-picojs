@@ -16,8 +16,12 @@ yarn add node-picojs
 const pico = require('node-picojs')
 const qThreshold = 10.0; // default is 5.0
 const IoU = 0.3; // default is 0.2
-pico.face_detection('image_file.jpg', qThreshold, IoU),then(res => {
-  console.log('face detection results: ', res)
+pico.face_detection('image_file.jpg', qThreshold, IoU),then(response => {
+  /**
+   * Ref to picojs doc: 
+   * The array response contains quadruplets of the form(r, c, s, q), where r, c and s specify the position (row, column) and size of face region, and q represents the detection score. The higher the score of the region, the more likely it is a face. 
+  */
+  console.log('face detection results: ', response)
 })
 ```
 
